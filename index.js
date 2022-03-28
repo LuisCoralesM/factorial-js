@@ -26,8 +26,8 @@ function memoize(func, max) {
 function factLessChar(n){return n<2?1:n*factLessChar(n-1);}
 
 // Recursive but more characters
-function factMoreChar(n) {
-    return n < 2 ? 1 : n * factMoreChar(n - 1);
+function factMoreChar(num) {
+    return num < 2 ? 1 : num * factMoreChar(num - 1);
 }
 
 // Using for
@@ -40,7 +40,7 @@ function forFact(num)
 }
 
 // ES6 Notation
-const factorialB = n => [...Array(n + 1).keys()].slice(1).reduce((acc, cur) => acc * cur, 1);
+const ES6Fact = n => [...Array(n + 1).keys()].slice(1).reduce((acc, cur) => acc * cur, 1);
 
 console.time("A")
 console.log("Testing time performance");
@@ -71,5 +71,5 @@ factMoreChar(100);
 console.timeEnd("no memoize more")
 
 console.time("es6")
-factorialB(100)
+ES6Fact(100)
 console.timeEnd("es6")
