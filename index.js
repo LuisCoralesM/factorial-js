@@ -1,7 +1,23 @@
+// Won't work after the 10.000
 // TAIL RECURSIVE Function (MINE HEHE)
-const recursiveFactorial = (num) => {
-    return num === 0 ? 1 : num < 0 ? -1 : (num * recursiveFactorial(num - 1));
-};
+const factM = (num) => {
+    const recursiveFactorial = (n, s) => {
+        if(n === 0) return s;
+        n -= 1; n *= s;
+        return recursiveFactorial(n, s);
+    };
+    
+    return recursiveFactorial(num, 1);
+}
+
+// TAIL Recursive 
+function factorialA(n) {
+
+    if (n <= 1) return 1;
+      
+    return (n * factorialA(n - 1));
+}
+
 
 // Using while
 const whileFactorial = (n, r = 1) => {
@@ -23,12 +39,7 @@ function memoize(func, max) {
 }
 
 // Recursive but less characters
-function factLessChar(n){return n<2?1:n*factLessChar(n-1);}
-
-// Recursive but more characters
-function factMoreChar(num) {
-    return num < 2 ? 1 : num * factMoreChar(num - 1);
-}
+function fact(n){return n<2?1:n*fact(n-1);}
 
 // Using for
 function forFact(num)
@@ -42,34 +53,32 @@ function forFact(num)
 // ES6 Notation
 const ES6Fact = n => [...Array(n + 1).keys()].slice(1).reduce((acc, cur) => acc * cur, 1);
 
-console.time("A")
 console.log("Testing time performance");
-console.timeEnd("A")
 
 console.time("for")
-forFact(100)
+forFact(10000)
 console.timeEnd("for")
 
 console.time("tail")
-recursiveFactorial(100);
+factM(10000);
 console.timeEnd("tail")
 
 console.time("while");
-whileFactorial(100);
+whileFactorial(10000);
 console.timeEnd("while")
 
 console.time("memoize")
-memoize(factLessChar,100);
+memoize(fact,10000);
 console.timeEnd("memoize")
 
-console.time("no memoize less")
-factLessChar(100);
-console.timeEnd("no memoize less")
+console.time("memoize2")
+memoize(fact,10000);
+console.timeEnd("memoize2")
 
-console.time("no memoize more")
-factMoreChar(100);
-console.timeEnd("no memoize more")
+console.time("memoize3")
+memoize(fact,10000);
+console.timeEnd("memoize3")
 
 console.time("es6")
-ES6Fact(100)
+ES6Fact(10000)
 console.timeEnd("es6")
